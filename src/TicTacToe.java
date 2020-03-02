@@ -11,6 +11,8 @@ public class TicTacToe {
 
     public static void main(String[] args) {
 
+
+
         char[][] gameBoard = {
 
                 {' ', '|', ' ', '|', ' '},
@@ -37,7 +39,10 @@ public class TicTacToe {
 
             String result;
             result = placePiece(gameBoard, playerPos, "player");
-            System.out.println(result);
+            if(result.length() > 0) {
+                System.out.println(result);
+                break;
+            }
 
             Random rand = new Random();
             int cpuPos = rand.nextInt(9) + 1;
@@ -47,7 +52,11 @@ public class TicTacToe {
             }
 
             result = placePiece(gameBoard, cpuPos, "cpu");
-            System.out.println(result);
+
+            if(result.length() > 0) {
+                System.out.println(result);
+                break;
+            }
 
         }
     }
@@ -105,7 +114,6 @@ public class TicTacToe {
                 break;
         }
         printGameBoard(gameBoard);
-
         return checkWinner();
     }
 
@@ -132,15 +140,15 @@ public class TicTacToe {
         winConds.add(cross2);
 
         for(List l : winConds) {
-            if(playerPositions.containsAll(l)) {
+            if (playerPositions.containsAll(l)) {
                 return "Player wins";
             } else if (cpuPositions.containsAll(l)) {
                 return "Computer wins";
-            } else if(playerPositions.size() + cpuPositions.size() == 9)
-            {
-                return "Tie";
             }
         }
+        if(playerPositions.size() + cpuPositions.size() == 9) {
+                return "Tie";
+            }
 
         return "";
 
